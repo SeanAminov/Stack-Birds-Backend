@@ -1,0 +1,45 @@
+{
+  "invoice_number": "INV-1001",
+  "vendor_name_on_invoice": "Acme Supplies Inc.",
+  "matched_vendor": "Acme Supplies Inc.",
+  "vendor_match_confidence": 1.0,
+  "invoice_date": "2025-11-02",
+  "invoice_total": 1302.35,
+  "status": "FLAGGED",
+  "variance_detected": true,
+  "reason_codes": [
+    "PRICE_ANOMALY:Printer Toner Model X",
+    "PRICE_ANOMALY:Staples Pack"
+  ],
+  "clarifying_questions": [
+    "Price anomalies beyond the 1.5x/0.75x threshold: Printer Toner Model X ($120.00 vs avg $21.20 \u2014 OVERPRICED); Staples Pack ($8.00 vs avg $83.89 \u2014 UNDERPRICED). Please verify these prices with the vendor before approving."
+  ],
+  "reconciliation_summary": {
+    "line_items_checked": 3,
+    "items_in_range": 1,
+    "items_outside_range": 0,
+    "items_out_of_range": 2,
+    "items_no_contract": 0,
+    "math_issues": 0,
+    "tax_status": "OK",
+    "shipping_status": "OK"
+  },
+  "ai_analysis": {
+    "available": true,
+    "model": "gpt-4o-mini",
+    "risk_level": "high",
+    "executive_summary": "This invoice from Acme Supplies Inc. includes significant price anomalies for two items, raising concerns about potential overcharging and pricing errors.",
+    "insights": [
+      "The Printer Toner Model X is priced at 2.8 times the historical average, indicating a potential overpricing issue.",
+      "The Staples Pack is priced significantly below the historical average, suggesting a possible error or misclassification."
+    ],
+    "recommended_questions": [
+      "Can you confirm the pricing for the Printer Toner Model X and whether this is a standard rate?",
+      "Is there a reason for the unusually low price of the Staples Pack, such as a promotional discount or error?",
+      "Have there been any recent changes in vendor pricing or contracts that could explain these discrepancies?"
+    ],
+    "explanation": "This invoice was flagged due to significant price anomalies: the Printer Toner Model X is overpriced compared to historical data, while the Staples Pack is underpriced, which could indicate an error or miscommunication regarding quantities or items.",
+    "latency_ms": 5363,
+    "note": "AI analysis is ADVISORY. Algorithmic flags are final and cannot be overridden by AI."
+  }
+}

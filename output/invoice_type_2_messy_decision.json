@@ -1,0 +1,44 @@
+{
+  "invoice_number": "BO-8872",
+  "vendor_name_on_invoice": "Bright Office LLC",
+  "matched_vendor": "BrightOffice LLC",
+  "vendor_match_confidence": 0.95,
+  "invoice_date": null,
+  "invoice_total": 430.31,
+  "status": "FLAGGED",
+  "variance_detected": true,
+  "reason_codes": [
+    "PRICE_ANOMALY:Cable Management Kit"
+  ],
+  "clarifying_questions": [
+    "Price anomalies beyond the 1.5x/0.75x threshold: Cable Management Kit ($22.50 vs avg $81.28 \u2014 UNDERPRICED). Please verify these prices with the vendor before approving."
+  ],
+  "reconciliation_summary": {
+    "line_items_checked": 3,
+    "items_in_range": 2,
+    "items_outside_range": 0,
+    "items_out_of_range": 1,
+    "items_no_contract": 0,
+    "math_issues": 0,
+    "tax_status": "OK",
+    "shipping_status": "OK"
+  },
+  "ai_analysis": {
+    "available": true,
+    "model": "gpt-4o-mini",
+    "risk_level": "high",
+    "executive_summary": "This invoice from Bright Office LLC has been flagged due to a significant price anomaly for the Cable Management Kit, which is priced far below historical averages. While other items are within acceptable ranges, the discrepancy raises concerns about potential errors or mispricing.",
+    "insights": [
+      "The Cable Management Kit is priced at $22.50, which is significantly lower than the historical average of $81.28, indicating a possible error or misclassification.",
+      "All items from this vendor are being scrutinized due to the flagged price anomaly, which could suggest a broader issue with pricing consistency."
+    ],
+    "recommended_questions": [
+      "Can you confirm the specifications and quantities for the Cable Management Kit to ensure it matches what was ordered?",
+      "Have there been any recent changes in pricing or contracts with Bright Office LLC that could explain this anomaly?",
+      "Is there a history of similar pricing discrepancies with this vendor or specific items?"
+    ],
+    "explanation": "The invoice was flagged primarily due to the Cable Management Kit being priced at $22.50, which is significantly below the historical range of $70.29 to $92.26. This raises concerns about potential errors in the invoice or incorrect item descriptions.",
+    "latency_ms": 4918,
+    "note": "AI analysis is ADVISORY. Algorithmic flags are final and cannot be overridden by AI."
+  }
+}

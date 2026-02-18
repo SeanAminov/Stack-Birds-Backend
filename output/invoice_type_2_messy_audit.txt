@@ -1,0 +1,104 @@
+[2026-02-18T01:21:55.058830+00:00] AUDIT TRAIL - Invoice BO-8872
+
+STEP 1: DATA EXTRACTION
+  Source: PDF file
+  Vendor extracted: 'Bright Office LLC'
+  Invoice #: BO-8872
+  Date: None
+  Line items found: 3
+  Subtotal: $397.5
+  Tax: $32.81
+  Shipping: $0.0
+  Total: $430.31
+  Extraction warnings: None
+
+STEP 2: VENDOR VERIFICATION
+  Invoice says: 'Bright Office LLC'
+  Best match: 'BrightOffice LLC'
+  Match method: alias
+  Confidence: 95%
+  ASSUMPTION: Known alias for 'BrightOffice LLC'.
+
+STEP 3: PRICE COMPARISON (0.75x-1.5x threshold, qty-aware)
+  Item: Standing Desk Rental
+    Invoice price: $150.0
+    Quantity: 1.0
+    Historical range: $27.31 – $92.77
+    Avg from history: $60.04
+    Variance from avg: 24.9%
+    Rate source: historical
+    Qty adjustment: 2.0x
+    Verdict: IN_RANGE
+    Detail: $150.00 is within acceptable range ($27.31 – $92.77, 2 data points, 45% buffer, qty-adjusted by 2.00x).
+  Item: Ergonomic Chair Rental
+    Invoice price: $90.0
+    Quantity: 2.0
+    Historical range: $38.86 – $40.00
+    Avg from history: $39.43
+    Variance from avg: 14.1%
+    Rate source: historical
+    Qty adjustment: 2.0x
+    Verdict: IN_RANGE
+    Detail: $90.00 is within acceptable range ($38.86 – $40.00, 2 data points, 45% buffer, qty-adjusted by 2.00x).
+  Item: Cable Management Kit
+    Invoice price: $22.5
+    Quantity: 3.0
+    Historical range: $70.29 – $92.26
+    Avg from history: $81.275
+    Variance from avg: -86.2%
+    Rate source: historical
+    Qty adjustment: 2.0x
+    Verdict: OUT_OF_RANGE
+    Detail: UNDERPRICED: $22.50 is 0.14x the historical avg ($81.28). $70.29 – $92.26. Below 0.75x floor — possible error, wrong item, or missing quantity.
+
+STEP 4: MATH, TAX & SHIPPING CHECKS
+  Math: All calculations verified.
+  Tax: Tax rate 8.25% matches known rate 8.2%.
+  Shipping: No shipping charged.
+
+STEP 5: ALGORITHMIC DECISION
+  Status: FLAGGED
+
+  FLAG REASONS:
+    - PRICE_ANOMALY:Cable Management Kit
+
+  OBSERVATIONS:
+    - Vendor matched via known alias to 'BrightOffice LLC'.
+    - Tax: Tax rate 8.25% matches known rate 8.2%.
+    - Shipping: No shipping charged.
+
+  CLARIFYING QUESTIONS:
+    Q1: Price anomalies beyond the 1.5x/0.75x threshold: Cable Management Kit ($22.50 vs avg $81.28 — UNDERPRICED). Please verify these prices with the vendor before approving.
+
+  REASONING:
+    One or more checks produced a flag requiring human attention.
+    This does NOT mean the invoice is wrong — it means the system
+    cannot confidently verify it. See clarifying questions above.
+
+STEP 6: AI ANALYSIS (advisory layer)
+  Model: gpt-4o-mini
+  Latency: 4918ms
+  Risk Level: HIGH
+  Executive Summary: This invoice from Bright Office LLC has been flagged due to a significant price anomaly for the Cable Management Kit, which is priced far below historical averages. While other items are within acceptable ranges, the discrepancy raises concerns about potential errors or mispricing.
+
+  AI INSIGHTS:
+    - The Cable Management Kit is priced at $22.50, which is significantly lower than the historical average of $81.28, indicating a possible error or misclassification.
+    - All items from this vendor are being scrutinized due to the flagged price anomaly, which could suggest a broader issue with pricing consistency.
+
+  AI-GENERATED QUESTIONS:
+    AQ1: Can you confirm the specifications and quantities for the Cable Management Kit to ensure it matches what was ordered?
+    AQ2: Have there been any recent changes in pricing or contracts with Bright Office LLC that could explain this anomaly?
+    AQ3: Is there a history of similar pricing discrepancies with this vendor or specific items?
+
+  AI EXPLANATION: The invoice was flagged primarily due to the Cable Management Kit being priced at $22.50, which is significantly below the historical range of $70.29 to $92.26. This raises concerns about potential errors in the invoice or incorrect item descriptions.
+
+  GUARDRAIL STATUS:
+    - AI cannot override algorithmic flags: ENFORCED
+    - AI cannot approve FLAGGED invoices: ENFORCED
+    - AI risk_level validated against algorithmic status: ENFORCED
+    - All AI outputs sanitized and truncated: ENFORCED
+
+GUARDRAIL SUMMARY:
+  Algorithmic decision is FINAL — AI analysis is advisory only.
+  AI cannot weaken, override, or modify any algorithmic flags.
+  If AI and algorithm disagree, the algorithm always wins.

@@ -1,0 +1,62 @@
+========================================================================
+  INVOICE RECONCILIATION REPORT
+========================================================================
+
+  Invoice:     ZCG-5541
+  Vendor:      ZENITH CATERING GROUP
+  Matched to:  Zenith Catering Group Inc (alias, 95% confidence)
+  Date:        10/28/2025
+  Total:       $1,149.00
+
+  Decision:    >>> FLAGGED FOR HUMAN REVIEW <<<
+  Reasons:     NEW_ITEMS_NO_RATE_HISTORY:Corporate Lunch Buffet, Beverage Package, Vegetarian Add-on
+
+------------------------------------------------------------------------
+  LINE ITEM COMPARISON
+------------------------------------------------------------------------
+  Item                         Qty   Invoice$     Range (historical) Status
+  ------------------------  ----- ---------- ---------------------- ------------
+  Corporate Lunch Buffet      45.0     $18.00                No data ? NEW
+  Beverage Package            45.0      $5.00                No data ? NEW
+  Vegetarian Add-on           12.0      $4.50                No data ? NEW
+
+------------------------------------------------------------------------
+  TOTALS & OBSERVATIONS
+------------------------------------------------------------------------
+  Subtotal:  $1,089.00
+  Tax:       $0.00
+  Shipping:  $60.00
+  Total:     $1,149.00
+
+------------------------------------------------------------------------
+  OBSERVATIONS
+------------------------------------------------------------------------
+  - Vendor matched via known alias to 'Zenith Catering Group Inc'.
+  - Tax: No tax charged ($0). Could be tax-exempt or bundled into unit prices.
+  - Shipping: Shipping $60.00 within norms (max seen: $60.00).
+
+------------------------------------------------------------------------
+  CLARIFYING QUESTIONS (for human reviewer)
+------------------------------------------------------------------------
+  Q1: No historical pricing for: Corporate Lunch Buffet, Beverage Package, Vegetarian Add-on. Are these new products/services from this vendor? If approved, these prices become the baseline for future invoices.
+
+------------------------------------------------------------------------
+  AI ANALYSIS (advisory — algorithmic flags are final)
+------------------------------------------------------------------------
+  Risk Level:  MEDIUM
+  Summary:     This invoice from Zenith Catering Group includes several items with no historical rate data, raising concerns about pricing validity and potential overcharges.
+
+  Insights:
+    - All line items are flagged due to lack of historical rate data, indicating a potential issue with pricing consistency.
+    - The vendor is matched via an alias, which may suggest a need for further verification of their pricing practices.
+    - The absence of tax charges could indicate a tax-exempt status or that costs are included in the item prices, which requires clarification.
+
+  AI-Generated Questions:
+    AQ1: What is the basis for the pricing of the Corporate Lunch Buffet, Beverage Package, and Vegetarian Add-on?
+    AQ2: Is there a contract or agreement in place with Zenith Catering Group that outlines pricing for these items?
+    AQ3: Can we confirm the tax-exempt status of this invoice or clarify how tax is being handled?
+
+  Explanation: This invoice was flagged because all line items lack historical rate data, making it impossible to assess whether the prices are reasonable or consistent with past transactions. Without a contract rate, there is a risk of overcharging.
+  Model: gpt-4o-mini | Latency: 5166ms
+
+========================================================================

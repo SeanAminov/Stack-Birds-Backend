@@ -1,0 +1,45 @@
+{
+  "invoice_number": "ZCG-5541",
+  "vendor_name_on_invoice": "ZENITH CATERING GROUP",
+  "matched_vendor": "Zenith Catering Group Inc",
+  "vendor_match_confidence": 0.95,
+  "invoice_date": "10/28/2025",
+  "invoice_total": 1149.0,
+  "status": "FLAGGED",
+  "variance_detected": true,
+  "reason_codes": [
+    "NEW_ITEMS_NO_RATE_HISTORY:Corporate Lunch Buffet, Beverage Package, Vegetarian Add-on"
+  ],
+  "clarifying_questions": [
+    "No historical pricing for: Corporate Lunch Buffet, Beverage Package, Vegetarian Add-on. Are these new products/services from this vendor? If approved, these prices become the baseline for future invoices."
+  ],
+  "reconciliation_summary": {
+    "line_items_checked": 3,
+    "items_in_range": 0,
+    "items_outside_range": 0,
+    "items_out_of_range": 0,
+    "items_no_contract": 3,
+    "math_issues": 0,
+    "tax_status": "OBSERVATION",
+    "shipping_status": "OK"
+  },
+  "ai_analysis": {
+    "available": true,
+    "model": "gpt-4o-mini",
+    "risk_level": "medium",
+    "executive_summary": "This invoice from Zenith Catering Group includes several items with no historical rate data, raising concerns about pricing validity and potential overcharges.",
+    "insights": [
+      "All line items are flagged due to lack of historical rate data, indicating a potential issue with pricing consistency.",
+      "The vendor is matched via an alias, which may suggest a need for further verification of their pricing practices.",
+      "The absence of tax charges could indicate a tax-exempt status or that costs are included in the item prices, which requires clarification."
+    ],
+    "recommended_questions": [
+      "What is the basis for the pricing of the Corporate Lunch Buffet, Beverage Package, and Vegetarian Add-on?",
+      "Is there a contract or agreement in place with Zenith Catering Group that outlines pricing for these items?",
+      "Can we confirm the tax-exempt status of this invoice or clarify how tax is being handled?"
+    ],
+    "explanation": "This invoice was flagged because all line items lack historical rate data, making it impossible to assess whether the prices are reasonable or consistent with past transactions. Without a contract rate, there is a risk of overcharging.",
+    "latency_ms": 5166,
+    "note": "AI analysis is ADVISORY. Algorithmic flags are final and cannot be overridden by AI."
+  }
+}

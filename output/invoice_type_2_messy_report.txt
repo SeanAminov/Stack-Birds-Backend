@@ -1,0 +1,61 @@
+========================================================================
+  INVOICE RECONCILIATION REPORT
+========================================================================
+
+  Invoice:     BO-8872
+  Vendor:      Bright Office LLC
+  Matched to:  BrightOffice LLC (alias, 95% confidence)
+  Date:        None
+  Total:       $430.31
+
+  Decision:    >>> FLAGGED FOR HUMAN REVIEW <<<
+  Reasons:     PRICE_ANOMALY:Cable Management Kit
+
+------------------------------------------------------------------------
+  LINE ITEM COMPARISON
+------------------------------------------------------------------------
+  Item                         Qty   Invoice$     Range (historical) Status
+  ------------------------  ----- ---------- ---------------------- ------------
+  Standing Desk Rental         1.0    $150.00        $27.31 – $92.77 OK
+  Ergonomic Chair Rental       2.0     $90.00        $38.86 – $40.00 OK
+  Cable Management Kit         3.0     $22.50        $70.29 – $92.26 !! FLAG
+
+------------------------------------------------------------------------
+  TOTALS & OBSERVATIONS
+------------------------------------------------------------------------
+  Subtotal:  $397.50
+  Tax:       $32.81
+  Shipping:  $0.00
+  Total:     $430.31
+
+------------------------------------------------------------------------
+  OBSERVATIONS
+------------------------------------------------------------------------
+  - Vendor matched via known alias to 'BrightOffice LLC'.
+  - Tax: Tax rate 8.25% matches known rate 8.2%.
+  - Shipping: No shipping charged.
+
+------------------------------------------------------------------------
+  CLARIFYING QUESTIONS (for human reviewer)
+------------------------------------------------------------------------
+  Q1: Price anomalies beyond the 1.5x/0.75x threshold: Cable Management Kit ($22.50 vs avg $81.28 — UNDERPRICED). Please verify these prices with the vendor before approving.
+
+------------------------------------------------------------------------
+  AI ANALYSIS (advisory — algorithmic flags are final)
+------------------------------------------------------------------------
+  Risk Level:  HIGH
+  Summary:     This invoice from Bright Office LLC has been flagged due to a significant price anomaly for the Cable Management Kit, which is priced far below historical averages. While other items are within acceptable ranges, the discrepancy raises concerns about potential errors or mispricing.
+
+  Insights:
+    - The Cable Management Kit is priced at $22.50, which is significantly lower than the historical average of $81.28, indicating a possible error or misclassification.
+    - All items from this vendor are being scrutinized due to the flagged price anomaly, which could suggest a broader issue with pricing consistency.
+
+  AI-Generated Questions:
+    AQ1: Can you confirm the specifications and quantities for the Cable Management Kit to ensure it matches what was ordered?
+    AQ2: Have there been any recent changes in pricing or contracts with Bright Office LLC that could explain this anomaly?
+    AQ3: Is there a history of similar pricing discrepancies with this vendor or specific items?
+
+  Explanation: The invoice was flagged primarily due to the Cable Management Kit being priced at $22.50, which is significantly below the historical range of $70.29 to $92.26. This raises concerns about potential errors in the invoice or incorrect item descriptions.
+  Model: gpt-4o-mini | Latency: 4918ms
+
+========================================================================

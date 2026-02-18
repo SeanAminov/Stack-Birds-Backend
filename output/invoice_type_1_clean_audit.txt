@@ -1,0 +1,102 @@
+[2026-02-18T01:21:49.895443+00:00] AUDIT TRAIL - Invoice INV-1001
+
+STEP 1: DATA EXTRACTION
+  Source: PDF file
+  Vendor extracted: 'Acme Supplies Inc.'
+  Invoice #: INV-1001
+  Date: 2025-11-02
+  Line items found: 3
+  Subtotal: $1180.0
+  Tax: $97.35
+  Shipping: $25.0
+  Total: $1302.35
+  Extraction warnings: None
+
+STEP 2: VENDOR VERIFICATION
+  Invoice says: 'Acme Supplies Inc.'
+  Best match: 'Acme Supplies Inc.'
+  Match method: exact
+  Confidence: 100%
+
+STEP 3: PRICE COMPARISON (0.75x-1.5x threshold, qty-aware)
+  Item: A4 Paper Box
+    Invoice price: $25.0
+    Quantity: 20.0
+    Historical range: $24.19 – $88.72
+    Avg from history: $65.96666666666667
+    Variance from avg: -62.1%
+    Rate source: historical
+    Verdict: IN_RANGE
+    Detail: $25.00 is within acceptable range ($24.19 – $88.72, 3 data points, 35% buffer).
+  Item: Printer Toner Model X
+    Invoice price: $120.0
+    Quantity: 5.0
+    Historical range: $15.09 – $32.61
+    Avg from history: $21.203333333333333
+    Variance from avg: 183.0%
+    Rate source: historical
+    Qty adjustment: 2.0x
+    Verdict: OUT_OF_RANGE
+    Detail: OVERPRICED: $120.00 is 2.8x the historical avg ($21.20). $15.09 – $32.61. Exceeds 1.5x ceiling.
+  Item: Staples Pack
+    Invoice price: $8.0
+    Quantity: 10.0
+    Historical range: $28.43 – $147.86
+    Avg from history: $83.89333333333333
+    Variance from avg: -93.8%
+    Rate source: historical
+    Qty adjustment: 1.54x
+    Verdict: OUT_OF_RANGE
+    Detail: UNDERPRICED: $8.00 is 0.06x the historical avg ($83.89). $28.43 – $147.86. Below 0.75x floor — possible error, wrong item, or missing quantity.
+
+STEP 4: MATH, TAX & SHIPPING CHECKS
+  Math: All calculations verified.
+  Tax: Tax rate 8.25% matches known rate 8.2%.
+  Shipping: Shipping $25.00 within norms (max seen: $60.00).
+
+STEP 5: ALGORITHMIC DECISION
+  Status: FLAGGED
+
+  FLAG REASONS:
+    - PRICE_ANOMALY:Printer Toner Model X
+    - PRICE_ANOMALY:Staples Pack
+
+  OBSERVATIONS:
+    - Tax: Tax rate 8.25% matches known rate 8.2%.
+    - Shipping: Shipping $25.00 within norms (max seen: $60.00).
+
+  CLARIFYING QUESTIONS:
+    Q1: Price anomalies beyond the 1.5x/0.75x threshold: Printer Toner Model X ($120.00 vs avg $21.20 — OVERPRICED); Staples Pack ($8.00 vs avg $83.89 — UNDERPRICED). Please verify these prices with the vendor before approving.
+
+  REASONING:
+    One or more checks produced a flag requiring human attention.
+    This does NOT mean the invoice is wrong — it means the system
+    cannot confidently verify it. See clarifying questions above.
+
+STEP 6: AI ANALYSIS (advisory layer)
+  Model: gpt-4o-mini
+  Latency: 5363ms
+  Risk Level: HIGH
+  Executive Summary: This invoice from Acme Supplies Inc. includes significant price anomalies for two items, raising concerns about potential overcharging and pricing errors.
+
+  AI INSIGHTS:
+    - The Printer Toner Model X is priced at 2.8 times the historical average, indicating a potential overpricing issue.
+    - The Staples Pack is priced significantly below the historical average, suggesting a possible error or misclassification.
+
+  AI-GENERATED QUESTIONS:
+    AQ1: Can you confirm the pricing for the Printer Toner Model X and whether this is a standard rate?
+    AQ2: Is there a reason for the unusually low price of the Staples Pack, such as a promotional discount or error?
+    AQ3: Have there been any recent changes in vendor pricing or contracts that could explain these discrepancies?
+
+  AI EXPLANATION: This invoice was flagged due to significant price anomalies: the Printer Toner Model X is overpriced compared to historical data, while the Staples Pack is underpriced, which could indicate an error or miscommunication regarding quantities or items.
+
+  GUARDRAIL STATUS:
+    - AI cannot override algorithmic flags: ENFORCED
+    - AI cannot approve FLAGGED invoices: ENFORCED
+    - AI risk_level validated against algorithmic status: ENFORCED
+    - All AI outputs sanitized and truncated: ENFORCED
+
+GUARDRAIL SUMMARY:
+  Algorithmic decision is FINAL — AI analysis is advisory only.
+  AI cannot weaken, override, or modify any algorithmic flags.
+  If AI and algorithm disagree, the algorithm always wins.

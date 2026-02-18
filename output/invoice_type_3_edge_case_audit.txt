@@ -1,0 +1,99 @@
+[2026-02-18T01:22:00.522907+00:00] AUDIT TRAIL - Invoice ZCG-5541
+
+STEP 1: DATA EXTRACTION
+  Source: PDF file
+  Vendor extracted: 'ZENITH CATERING GROUP'
+  Invoice #: ZCG-5541
+  Date: 10/28/2025
+  Line items found: 3
+  Subtotal: $1089.0
+  Tax: $0.0
+  Shipping: $60.0
+  Total: $1149.0
+  Extraction warnings: None
+
+STEP 2: VENDOR VERIFICATION
+  Invoice says: 'ZENITH CATERING GROUP'
+  Best match: 'Zenith Catering Group Inc'
+  Match method: alias
+  Confidence: 95%
+  ASSUMPTION: Known alias for 'Zenith Catering Group Inc'.
+
+STEP 3: PRICE COMPARISON (0.75x-1.5x threshold, qty-aware)
+  Item: Corporate Lunch Buffet
+    Invoice price: $18.0
+    Quantity: 45.0
+    Historical range: None
+    Avg from history: $None
+    Variance from avg: None%
+    Verdict: NO_CONTRACT_RATE
+    Detail: No historical rate data for 'Corporate Lunch Buffet' from Zenith Catering Group Inc. Cannot compare — needs human review to establish baseline.
+  Item: Beverage Package
+    Invoice price: $5.0
+    Quantity: 45.0
+    Historical range: None
+    Avg from history: $None
+    Variance from avg: None%
+    Verdict: NO_CONTRACT_RATE
+    Detail: No historical rate data for 'Beverage Package' from Zenith Catering Group Inc. Cannot compare — needs human review to establish baseline.
+  Item: Vegetarian Add-on
+    Invoice price: $4.5
+    Quantity: 12.0
+    Historical range: None
+    Avg from history: $None
+    Variance from avg: None%
+    Verdict: NO_CONTRACT_RATE
+    Detail: No historical rate data for 'Vegetarian Add-on' from Zenith Catering Group Inc. Cannot compare — needs human review to establish baseline.
+
+STEP 4: MATH, TAX & SHIPPING CHECKS
+  Math: All calculations verified.
+  Tax: No tax charged ($0). Could be tax-exempt or bundled into unit prices.
+  Shipping: Shipping $60.00 within norms (max seen: $60.00).
+
+STEP 5: ALGORITHMIC DECISION
+  Status: FLAGGED
+
+  FLAG REASONS:
+    - NEW_ITEMS_NO_RATE_HISTORY:Corporate Lunch Buffet, Beverage Package, Vegetarian Add-on
+
+  OBSERVATIONS:
+    - Vendor matched via known alias to 'Zenith Catering Group Inc'.
+    - Tax: No tax charged ($0). Could be tax-exempt or bundled into unit prices.
+    - Shipping: Shipping $60.00 within norms (max seen: $60.00).
+
+  CLARIFYING QUESTIONS:
+    Q1: No historical pricing for: Corporate Lunch Buffet, Beverage Package, Vegetarian Add-on. Are these new products/services from this vendor? If approved, these prices become the baseline for future invoices.
+
+  REASONING:
+    One or more checks produced a flag requiring human attention.
+    This does NOT mean the invoice is wrong — it means the system
+    cannot confidently verify it. See clarifying questions above.
+
+STEP 6: AI ANALYSIS (advisory layer)
+  Model: gpt-4o-mini
+  Latency: 5166ms
+  Risk Level: MEDIUM
+  Executive Summary: This invoice from Zenith Catering Group includes several items with no historical rate data, raising concerns about pricing validity and potential overcharges.
+
+  AI INSIGHTS:
+    - All line items are flagged due to lack of historical rate data, indicating a potential issue with pricing consistency.
+    - The vendor is matched via an alias, which may suggest a need for further verification of their pricing practices.
+    - The absence of tax charges could indicate a tax-exempt status or that costs are included in the item prices, which requires clarification.
+
+  AI-GENERATED QUESTIONS:
+    AQ1: What is the basis for the pricing of the Corporate Lunch Buffet, Beverage Package, and Vegetarian Add-on?
+    AQ2: Is there a contract or agreement in place with Zenith Catering Group that outlines pricing for these items?
+    AQ3: Can we confirm the tax-exempt status of this invoice or clarify how tax is being handled?
+
+  AI EXPLANATION: This invoice was flagged because all line items lack historical rate data, making it impossible to assess whether the prices are reasonable or consistent with past transactions. Without a contract rate, there is a risk of overcharging.
+
+  GUARDRAIL STATUS:
+    - AI cannot override algorithmic flags: ENFORCED
+    - AI cannot approve FLAGGED invoices: ENFORCED
+    - AI risk_level validated against algorithmic status: ENFORCED
+    - All AI outputs sanitized and truncated: ENFORCED
+
+GUARDRAIL SUMMARY:
+  Algorithmic decision is FINAL — AI analysis is advisory only.
+  AI cannot weaken, override, or modify any algorithmic flags.
+  If AI and algorithm disagree, the algorithm always wins.

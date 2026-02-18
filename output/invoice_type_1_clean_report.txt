@@ -1,0 +1,60 @@
+========================================================================
+  INVOICE RECONCILIATION REPORT
+========================================================================
+
+  Invoice:     INV-1001
+  Vendor:      Acme Supplies Inc.
+  Matched to:  Acme Supplies Inc. (exact, 100% confidence)
+  Date:        2025-11-02
+  Total:       $1,302.35
+
+  Decision:    >>> FLAGGED FOR HUMAN REVIEW <<<
+  Reasons:     PRICE_ANOMALY:Printer Toner Model X, PRICE_ANOMALY:Staples Pack
+
+------------------------------------------------------------------------
+  LINE ITEM COMPARISON
+------------------------------------------------------------------------
+  Item                         Qty   Invoice$     Range (historical) Status
+  ------------------------  ----- ---------- ---------------------- ------------
+  A4 Paper Box                20.0     $25.00        $24.19 – $88.72 OK
+  Printer Toner Model X        5.0    $120.00        $15.09 – $32.61 !! FLAG
+  Staples Pack                10.0      $8.00       $28.43 – $147.86 !! FLAG
+
+------------------------------------------------------------------------
+  TOTALS & OBSERVATIONS
+------------------------------------------------------------------------
+  Subtotal:  $1,180.00
+  Tax:       $97.35
+  Shipping:  $25.00
+  Total:     $1,302.35
+
+------------------------------------------------------------------------
+  OBSERVATIONS
+------------------------------------------------------------------------
+  - Tax: Tax rate 8.25% matches known rate 8.2%.
+  - Shipping: Shipping $25.00 within norms (max seen: $60.00).
+
+------------------------------------------------------------------------
+  CLARIFYING QUESTIONS (for human reviewer)
+------------------------------------------------------------------------
+  Q1: Price anomalies beyond the 1.5x/0.75x threshold: Printer Toner Model X ($120.00 vs avg $21.20 — OVERPRICED); Staples Pack ($8.00 vs avg $83.89 — UNDERPRICED). Please verify these prices with the vendor before approving.
+
+------------------------------------------------------------------------
+  AI ANALYSIS (advisory — algorithmic flags are final)
+------------------------------------------------------------------------
+  Risk Level:  HIGH
+  Summary:     This invoice from Acme Supplies Inc. includes significant price anomalies for two items, raising concerns about potential overcharging and pricing errors.
+
+  Insights:
+    - The Printer Toner Model X is priced at 2.8 times the historical average, indicating a potential overpricing issue.
+    - The Staples Pack is priced significantly below the historical average, suggesting a possible error or misclassification.
+
+  AI-Generated Questions:
+    AQ1: Can you confirm the pricing for the Printer Toner Model X and whether this is a standard rate?
+    AQ2: Is there a reason for the unusually low price of the Staples Pack, such as a promotional discount or error?
+    AQ3: Have there been any recent changes in vendor pricing or contracts that could explain these discrepancies?
+
+  Explanation: This invoice was flagged due to significant price anomalies: the Printer Toner Model X is overpriced compared to historical data, while the Staples Pack is underpriced, which could indicate an error or miscommunication regarding quantities or items.
+  Model: gpt-4o-mini | Latency: 5363ms
+
+========================================================================
